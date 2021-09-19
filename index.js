@@ -1,33 +1,56 @@
-const sliderContainer = document.querySelector('.slider-container')
-const leftSlide = document.querySelector('.left-slide')
-const rightSlide = document.querySelector('.right-slide')
+ 
+const tagsEl = document.getElementById('tags')
+const textArea = document.getElementById('textarea')
 
-const upButton = document.querySelector('.up-button')
-const douwnButton = document.querySelector('.douwn-button')
+ textArea.addEventListener('keyup', (e) => {
+    createTextArea(e.target.value)
+    if(e.key === 'Enter'){
+      setTimeout(() => {
+        e.target.value = ''
+      }, 10)
 
-const slideLength = rightSlide.querySelectorAll('div').length
-
-let activeSlideIndex = 0
-leftSlide.style.top = `-${(slideLength - 1) * 100}vh`
-
-
-upButton.addEventListener('click', () => changeSlide('up'))
-douwnButton.addEventListener('click', () => changeSlide('down'))
-
-const changeSlide = (diraction) => {
-    const sliderHeight = sliderContainer.clientHeight
-    if(diraction === 'up'){
-        activeSlideIndex++
-        if(activeSlideIndex > slideLength - 1){
-            activeSlideIndex = 0
-        }
+      randomSelect()
     }
-    if(diraction === 'down'){
-        activeSlideIndex--
-        if(activeSlideIndex < 0){
-            activeSlideIndex = slideLength - 1
-        }
-    }
-    rightSlide.style.transform = `translateY(-${activeSlideIndex * sliderHeight}px)`
-    leftSlide.style.transform = `translateY(${activeSlideIndex * sliderHeight}px)`
-}
+ })
+
+ const createTextArea = (input) => {
+     tagsEl.innerHTML = ''
+   const tags = input.split(',').filter(tag => tag.trim() !== '').map(tag => tag.trim())
+   tags.forEach(item => {
+       const tagEl = document.createElement('span')
+       tagEl.className = 'tag'
+       tagEl.innerText = item
+       tagsEl.appendChild(tagEl)
+   })   
+ }
+
+ const randomSelect = () => {
+   const times = 30
+   const interval = setInterval(() => {
+     const randamTag = pickRandomTag()
+     highLightTag(randamTag)
+     setTimeout(() => {
+       unHighLightTag(randamTag)
+     }, 100)
+   }, 100)
+   setTimeout(() => {
+     clearInterval(interval)
+    setTimeout(() => {
+      const randamTag = pickRandomTag()
+      highLightTag(randamTag)
+    }, 100)
+
+   }, times * 100)
+ }
+
+ const pickRandomTag = () => {
+   const tags = document.querySelectorAll('.tag')
+   return tags[Math.floor(Math.random() * tags.length)]   
+ }
+
+ const highLightTag = (tag) => {
+   tag.classList.add('heighlight')
+ }
+ const unHighLightTag = (tag) => {
+   tag.classList.remove('heighlight')
+ }
