@@ -138,5 +138,7 @@ body {
   -ms-transform: scale(1);
   -o-transform: scale(1);
   opacity: 1;
+  -webkit-transition-delay: 0.5s;
+          transition-delay: 0.5s;
 }
 /*# sourceMappingURL=style.css.map */
