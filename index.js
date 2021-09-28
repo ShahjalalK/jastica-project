@@ -1,16 +1,46 @@
-const iconBox = document.querySelectorAll('.iconBox')
-const contentBox = document.querySelectorAll('.contentBox')
+const slider = document.querySelectorAll('#slider')
+const leftIcon = document.querySelector('#left')
+const rightIcon = document.querySelector('#right')
+let i = 0
+leftIcon.addEventListener('click', () => changeSlider(left))
+rightIcon.addEventListener('click', () => changeSlider(right))
+const changeSlider = (diraction) => {
+    if(diraction === left){
+        prev()
+    }else if(diraction == right){       
+        next()
+    }
 
-iconBox.forEach((icon) => {
-    icon.addEventListener('mouseover', () => {
-      
-        contentBox.forEach((box) => {
-            box.className = 'contentBox'
-        })
-        document.getElementById(icon.dataset.id).className = 'contentBox active'
-       iconBox.forEach((i) => {
-           i.className = 'iconBox'
-       })
-       icon.className = 'iconBox active'
+    
+}
+
+const next = () => {
+    slider.forEach(slide => {
+        if(slide.classList.contains('active')){
+            slide.classList.remove('active')            
+        }
     })
-})
+    i++
+    if(i > slider.length - 1){
+        i = 0
+    }
+    slider[i].classList.add('active')
+    
+}
+
+const prev = () => {
+    slider.forEach(slide => {
+        if(slide.classList.contains('active')){
+            slide.classList.remove('active')            
+        }
+    })
+    i--
+    if(i < 0){
+        i = slider.length - 1
+    }
+    slider[i].classList.add('active')
+}
+
+const interval =  setInterval(() => {
+    next()
+}, 3000)

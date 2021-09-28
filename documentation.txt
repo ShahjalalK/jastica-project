@@ -1,0 +1,23 @@
+Top Header: 
+Privacy policy 
+Request Quote
+FAQ
+
+Header:
+Home
+About
+Practice Areas
+News
+Contact
+Elements
+Need Help?1 200 300 9000
+
+Home:
+P: Need Any Help?
+h1: We Fight for Right
+P: lorem15
+button: contact us
+
+alert:
+Now! Get a Free Consultation for Your Case.
+MAKE APPOINTMENT
